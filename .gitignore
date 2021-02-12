@@ -1,3 +1,4 @@
-string_calculator/.venv
-string_calculator/string_calculator.egg-info
+.venv
+string_calculator.egg-info
 **/__pycache__
+.mypy_cache
