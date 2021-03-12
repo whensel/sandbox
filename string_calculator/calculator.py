@@ -1,2 +1,6 @@
-def add_numbers(x: int, y: int) -> int:
-    return x + y
+def add(numbers: str) -> int:
+    if numbers == "":
+        return 0
+
+    x = int(numbers)
+    return x
