@@ -1,6 +1,6 @@
 .PHONY: run
 run: ## Runs the app
-	echo "Run the app"
+	poetry run runapp
 
 .PHONY: test
 test: ## Runs the tests
