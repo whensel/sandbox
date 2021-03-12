@@ -9,3 +9,8 @@ def test_empty_string_returns_zero():
 def test_one_returns_1():
     result = add("1")
     assert result == 1
+
+
+def test_add_two_numbers():
+    result = add("1,2")
+    assert result == 3
