@@ -4,7 +4,7 @@ run: ## Runs the app
 
 .PHONY: test
 test: ## Runs the tests
-	poetry run pytest
+	poetry run pytest -v
 
 .PHONY: help
 help: ## Display this message
