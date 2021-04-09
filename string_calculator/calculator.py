@@ -1,2 +1,6 @@
-def add_numbers(x: int, y: int) -> int:
-    return x + y
+def add(numbers: str) -> int:
+    # Guard clause
+    if numbers == "":
+        return 0
+
+    return sum(map(int, numbers.split(",")))
