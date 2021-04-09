@@ -31,4 +31,4 @@ jobs:
         poetry install
     - name: Run lint and tests
       run: |
-        make test
+        make lint test
