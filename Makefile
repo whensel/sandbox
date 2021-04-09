@@ -8,11 +8,11 @@ test: ## Runs the tests
 
 .PHONY: lint
 lint: ## Runs the linters
-	poetry run black --check
+	poetry run black --check .
 
 .PHONY: fmt
 fmt: ## Runs the formatters
-	poetry run black
+	poetry run black .
 
 .PHONY: help
 help: ## Display this message
