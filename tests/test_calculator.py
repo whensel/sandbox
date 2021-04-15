@@ -19,3 +19,15 @@ def test_add_two_numbers():
 def test_add_three_numbers():
     result = add("1,2,3")
     assert result == 6
+
+
+def test_allow_new_line():
+    result = add("1\n2,3")
+    assert result == 6
+
+
+def test_providing_delimiter():
+    result = add("//;\n1;2")
+    assert result == 3
+    result2 = add("//|\n1|2")
+    assert result2 == 3
