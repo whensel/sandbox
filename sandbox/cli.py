@@ -1,6 +1,6 @@
-from .calculator import add_numbers
+from .calculator import add
 
 
 def run(args=None):
-    added_numbers = add_numbers(2, 3)
+    added_numbers = add("2,3")
     print(f"Added numbers value is: {added_numbers}")

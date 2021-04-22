@@ -1,4 +1,4 @@
-from string_calculator import __version__
+from sandbox import __version__
 
 
 def test_version():
