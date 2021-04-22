@@ -1,4 +1,5 @@
 .venv
-string_calculator.egg-info
+sandbox.egg-info
 **/__pycache__
 .mypy_cache
+.idea/

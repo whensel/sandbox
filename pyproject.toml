@@ -1,5 +1,5 @@
 [tool.poetry]
-name = "string-calculator"
+name = "sandbox"
 version = "0.1.0"
 description = ""
 authors = ["Attila Domokos <adomokos@gmail.com>"]
@@ -12,7 +12,7 @@ pytest = "^5.2"
 black = "^20.8b1"
 
 [tool.poetry.scripts]
-runapp = "string_calculator.cli:run"
+runapp = "sandbox.cli:run"
 
 [tool.pytest.ini_options]
 minversion = "6.0"
