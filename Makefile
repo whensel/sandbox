@@ -1,3 +1,6 @@
+-include .env.$(or $(APP_ENV),dev)
+export
+
 .PHONY: run
 run: ## Runs the app
 	poetry run runapp
@@ -13,6 +16,15 @@ lint: ## Runs the linters
 .PHONY: fmt
 fmt: ## Runs the formatters
 	poetry run black .
+
+.PHONY: db-init
+db-init: ## Create schema for DB
+	cat resources/users.sql | \
+		 docker-compose exec -T db psql -U $(POSTGRES_USER) -d $(POSTGRES_DB)
+
+.PHONY: db-prompt
+db-prompt: ## Jumps into the Postgres DB psql prompt
+	docker-compose exec db psql -U $(POSTGRES_USER) -d $(POSTGRES_DB)
 
 .PHONY: help
 help: ## Display this message
