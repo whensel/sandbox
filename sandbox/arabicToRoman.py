@@ -36,11 +36,10 @@ def subtraction_process(number: int) -> str:
     response = ''
     
     while number >= 0:
-        for numbers in key:
-            if number - key[numbers] >= 0:
-                number = number - key[numbers]
-                key_reference = key[numbers]
-                response = response + locate_in_key(key_reference)
+        for roman_character in key:
+            if number - key[roman_character] >= 0:
+                number = number - key[roman_character]
+                response = response + locate_in_key(key[roman_character])
                 
                 break
         if number == 0:
