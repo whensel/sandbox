@@ -1,58 +1,71 @@
-from sandbox.arabicToRoman import arabicToRoman
+from sandbox.arabicToRoman import arabic_to_roman
 
 
 def test_one():
-    result = arabicToRoman(1)
+    result = arabic_to_roman(1)
     assert result == "I"
 
+
 def test_two():
-    result = arabicToRoman(2)
+    result = arabic_to_roman(2)
     assert result == "II"
 
+
 def test_three():
-    result = arabicToRoman(3)
+    result = arabic_to_roman(3)
     assert result == "III"
 
+
 def test_four():
-    result = arabicToRoman(4)
+    result = arabic_to_roman(4)
     assert result == "IV"
 
+
 def test_five():
-    result = arabicToRoman(5)
+    result = arabic_to_roman(5)
     assert result == "V"
 
+
 def test_six():
-    result = arabicToRoman(6)
+    result = arabic_to_roman(6)
     assert result == "VI"
 
+
 def test_seven():
-    result = arabicToRoman(7)
+    result = arabic_to_roman(7)
     assert result == "VII"
 
+
 def test_eight():
-    result = arabicToRoman(8)
+    result = arabic_to_roman(8)
     assert result == "VIII"
 
+
 def test_nine():
-    result = arabicToRoman(9)
+    result = arabic_to_roman(9)
     assert result == "IX"
 
+
 def test_ten():
-    result = arabicToRoman(10)
+    result = arabic_to_roman(10)
     assert result == "X"
 
+
 def test_11():
-    result = arabicToRoman(123)
+    result = arabic_to_roman(123)
     assert result == "CXXIII"
 
+
 def test_12():
-    result = arabicToRoman(999)
+    result = arabic_to_roman(999)
     assert result == "CMXCIX"
 
+
 def test_13():
-    result = arabicToRoman(486)
+    result = arabic_to_roman(486)
     assert result == "CDLXXXVI"
 
+
 def test_14():
-    result = arabicToRoman(857)
+    result = arabic_to_roman(857)
     assert result == "DCCCLVII"
