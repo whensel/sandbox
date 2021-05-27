@@ -1,55 +1,53 @@
 key = {
-        "M": 1000,
-        "CM": 900,
-        "D": 500,
-        "CD": 400,
-        "C": 100,
-        "XC": 90,
-        "L": 50,
-        "XL": 40,
-        "X": 10,
-        "IX": 9,
-        "V": 5,
-        "IV": 4,
-        "I": 1
-    }
+    "M": 1000,
+    "CM": 900,
+    "D": 500,
+    "CD": 400,
+    "C": 100,
+    "XC": 90,
+    "L": 50,
+    "XL": 40,
+    "X": 10,
+    "IX": 9,
+    "V": 5,
+    "IV": 4,
+    "I": 1,
+}
+
 
 def arabicToRoman(number: int) -> str:
 
-    #simple catch all
+    # simple catch all
     if locate_in_key(number) != None:
         return locate_in_key(number)
 
     response = subtraction_process(number)
 
-
     return response
 
-#finds the number in the key if possible
+
+# finds the number in the key if possible
 def locate_in_key(number: int) -> str:
     for roman_numeral in key:
         if key[roman_numeral] == number:
             return str(roman_numeral)
 
+
 # subtracts key numbers from main number until result is converted fully
 def subtraction_process(number: int) -> str:
-    response = ''
-    
+    response = ""
+
     while number >= 0:
         for roman_character in key:
             if number - key[roman_character] >= 0:
                 number = number - key[roman_character]
                 response = response + locate_in_key(key[roman_character])
-                
+
                 break
         if number == 0:
             return response
         else:
             pass
-
-
-
-
 
 
 ### my previous attempts ###
