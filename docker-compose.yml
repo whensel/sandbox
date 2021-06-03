@@ -9,3 +9,9 @@ services:
       - 5432:5432
     env_file:
       - .env.dev
+  docker_test:
+    container_name: poetry_test
+    image: library/python:3.9
+    build: ./sandbox
+    volumes:
+    - ./sandbox:/subvolume

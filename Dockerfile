@@ -1,7 +1,11 @@
 # Dockerfile, Image, Container
 
-FROM python:3.9
+FROM python:3.8
 
-ADD sandbox/main.py .
+WORKDIR /poetry-test
 
-CMD ["python", "./main.py"]
+COPY ./sandbox ./sandbox
+
+RUN pip install poetry
+
+ENTRYPOINT "make test"

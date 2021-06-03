@@ -21,10 +21,22 @@ fmt: ## Runs the formatters
 db-init: ## Create schema for DB
 	cat resources/users.sql | \
 		 docker-compose exec -T db psql -U $(POSTGRES_USER) -d $(POSTGRES_DB)
+	cat resources/posts.sql | \
+		 docker-compose exec -T db psql -U $(POSTGRES_USER) -d $(POSTGRES_DB)
 
 .PHONY: db-prompt
 db-prompt: ## Jumps into the Postgres DB psql prompt
 	docker-compose exec db psql -U $(POSTGRES_USER) -d $(POSTGRES_DB)
+
+##.PHONY: db-seed
+##db-seed: # load data into posts table
+
+.PHONEY: docker-run
+docker-run:
+	docker-compose exec docker_test
+
+
+
 
 .PHONY: help
 help: ## Display this message
