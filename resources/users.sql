@@ -1,4 +1,4 @@
-CREATE TABLE public.users (
+CREATE TABLE IF NOT EXISTS public.users (
     id SERIAL PRIMARY KEY,
     external_id UUID NOT NULL DEFAULT gen_random_uuid(),
     created_at timestamp without time zone DEFAULT CURRENT_TIMESTAMP NOT NULL,

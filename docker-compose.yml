@@ -9,9 +9,16 @@ services:
       - 5432:5432
     env_file:
       - .env.dev
+
   docker_test:
-    container_name: poetry_test
-    image: library/python:3.9
-    build: ./sandbox
-    volumes:
-    - ./sandbox:/subvolume
+    image: poetry-test
+    build:
+      context: .
+      dockerfile: Dockerfile
+    depends_on:
+      - db
+    env_file:
+      - .env.dev
+    environment:
+      - POSTGRES_HOST=postgres-db
+    command: tail -f /dev/null
