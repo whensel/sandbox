@@ -2,10 +2,14 @@
 
 FROM python:3.8
 
-WORKDIR /poetry-test
+WORKDIR /usr/app
 
-COPY ./sandbox ./sandbox
+RUN curl -sSL https://raw.githubusercontent.com/python-poetry/poetry/master/install-poetry.py | python -
+ENV PATH /root/.local/bin:$PATH
 
-RUN pip install poetry
+COPY ./poetry.lock /usr/app
+COPY ./pyproject.toml /usr/app
 
-ENTRYPOINT "make test"
+RUN poetry config virtualenvs.create false && poetry update && poetry install
+
+COPY . /usr/app
