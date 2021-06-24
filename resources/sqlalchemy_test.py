@@ -4,16 +4,18 @@ from sqlalchemy.orm import sessionmaker, relationship, scoped_session
 
 Base = declarative_base()
 
-class User(Base):
-    __tablename__ = 'users'
-    
-    id = Column('id', primary_key=True)
-    title = Column('title', String(255), nullable=False)
-    summary = Column('summary', String(140), nullable=False)
-    body = Column('body', Text, nullable=False)
-    is_deleted = Column('is_deleted', Boolean, nullable=False)
 
-connection_url = f'postgresql://sandbox_user:Fxber93wGaB2@postgres-db:5432/sandbox_test'
+class User(Base):
+    __tablename__ = "users"
+
+    id = Column("id", primary_key=True)
+    title = Column("title", String(255), nullable=False)
+    summary = Column("summary", String(140), nullable=False)
+    body = Column("body", Text, nullable=False)
+    is_deleted = Column("is_deleted", Boolean, nullable=False)
+
+
+connection_url = f"postgresql://sandbox_user:Fxber93wGaB2@postgres-db:5432/sandbox_test"
 
 engine = create_engine(connection_url)
 
