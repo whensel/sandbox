@@ -8,7 +8,3 @@ CREATE TABLE IF NOT EXISTS public.users (
     email character varying(255) NOT NULL,
     password character varying(255) NOT NULL
 );
-
-INSERT INTO users(first_name, last_name, email, password) VALUES
-('Bob', 'Smith', 'bob.smith@mail.com', 'password123'),
-('Mark', 'Johnson', 'mark.johnson@mail.com', 'password1234');
