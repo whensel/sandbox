@@ -29,14 +29,11 @@ db-prompt: ## Jumps into the Postgres DB psql prompt
 	docker-compose exec db psql -U $(POSTGRES_USER) -d $(POSTGRES_DB)
 
 .PHONEY: docker-run
-docker-run: ##Run Docker poetry test
+docker-run: ## Run Docker poetry test
 	docker-compose exec docker_test
 
 .PHONEY: db-seed
-db-seed: ##Seed postgres db
-
-
-
+db-seed: ## Seed postgres db
 
 .PHONY: help
 help: ## Display this message
