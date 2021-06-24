@@ -28,11 +28,12 @@ db-init: ## Create schema for DB
 db-prompt: ## Jumps into the Postgres DB psql prompt
 	docker-compose exec db psql -U $(POSTGRES_USER) -d $(POSTGRES_DB)
 
-##.PHONY: db-seed
-##db-seed: # load data into posts table
+.PHONEY: docker-start-db
+docker-start-db: ##Start postgres db
+	docker-compose exec db
 
 .PHONEY: docker-run
-docker-run:
+docker-run: ##Run Docker poetry test
 	docker-compose exec docker_test
 
 
