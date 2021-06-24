@@ -9,13 +9,15 @@ def read_users():
         for user in users:
             print(user.__dict__)
 
+
 def create_user():
     return User(
         first_name="Joe",
         last_name="Smith",
         email="joe.smith@mail.com",
-        password="Password1"
+        password="Password1",
     )
+
 
 def add_user():
     with session_scope() as session:
