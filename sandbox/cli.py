@@ -2,6 +2,7 @@
 from .models import User, Post
 from .db import session_scope
 from sqlalchemy import delete, update
+from typing import Any
 
 
 def read_users():
@@ -16,20 +17,30 @@ def create_user():
         first_name="Joe",
         last_name="Smith",
         email="joe.smith@mail.com",
-        password="Password1"
+        password="Password1",
     )
+
 
 def remove_user(user_id):
     with session_scope() as session:
-        delete_user= delete(User).where(User.id == user_id).execution_options(synchronize_session="fetch")
+        delete_user = delete(User).where(
+            User.id == user_id
+        )  # .execution_options(synchronize_session="fetch")
         session.execute(delete_user)
         session.commit()
 
+
 def update_user(user_id, new_name):
     with session_scope() as session:
-        update_user_first_name = update(User).where(User.id == user_id).values(first_name=new_name).execution_options(synchronize_session="fetch")
+        update_user_first_name = (
+            update(User)
+            .where(User.id == user_id)
+            .values(first_name=new_name)
+            .execution_options(synchronize_session="fetch")
+        )
         session.execute(update_user_first_name)
         session.commit()
+
 
 def add_user():
     with session_scope() as session:
@@ -37,13 +48,16 @@ def add_user():
         session.add(user)
         session.commit()
 
-def create_post():
+
+def create_post(user: User):
     return Post(
         title="Some Random Thing Happened",
         summary="This random event was truly random",
         body="Blaw Blaw Blaw Blaw Blaw",
-        is_deleted=False
+        is_deleted=False,
+        user=user,
     )
+
 
 def read_posts():
     with session_scope() as session:
@@ -51,30 +65,59 @@ def read_posts():
         for post in posts:
             print(post.__dict__)
 
+
 def add_post():
     with session_scope() as session:
         post = create_post()
         session.add(post)
         session.commit()
 
+
 def update_post(post_id, new_title):
     with session_scope() as session:
-        update_post_title = update(Post).where(Post.id == post_id).values(title=new_title).execution_options(
-            synchronize_session="fetch")
+        update_post_title = (
+            update(Post)
+            .where(Post.id == post_id)
+            .values(title=new_title)
+            .execution_options(synchronize_session="fetch")
+        )
         session.execute(update_post_title)
         session.commit()
 
+
 def delete_post(post_id):
     with session_scope() as session:
-        delete_post= delete(Post).where(Post.id == post_id).execution_options(synchronize_session="fetch")
+        delete_post = (
+            delete(Post)
+            .where(Post.id == post_id)
+            .execution_options(synchronize_session="fetch")
+        )
         session.execute(delete_post)
         session.commit()
 
 
-def run(args=None):
-    # add_user()
-    remove_user(2)
-    read_users()
+def read_user(session: Any, user_id: int) -> User:
+    user = session.query(User).get(user_id)
+    return user
 
-    #  added_numbers = add("2,3")
+
+def run(args=None):
+    with session_scope() as session:
+        #  add_user()
+        #  remove_user(2)
+        #  update_user(1, "Bob")
+        #  read_users()
+
+        u = read_user(session, 1)
+        print(u.__dict__)
+        print(u.posts)
+
+        # post = u.posts[2]
+        # print(post.__dict__)
+
+        # session.delete(post)
+
+        # post = create_post(u)
+        # print(post.__dict__)
+        #  added_numbers = add("2,3")
     #  print(f"Added numbers value is: {added_numbers}")
