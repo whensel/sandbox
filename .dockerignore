@@ -1,0 +1,11 @@
+#Ingore Files
+.gitignore
+.github/
+.pytest_cache/
+README.md
+README.rst
+.venv
+sandbox.egg-info
+**/__pycache__
+.mypy_cache
+.idea/

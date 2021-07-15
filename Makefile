@@ -21,10 +21,28 @@ fmt: ## Runs the formatters
 db-init: ## Create schema for DB
 	cat resources/users.sql | \
 		 docker-compose exec -T db psql -U $(POSTGRES_USER) -d $(POSTGRES_DB)
+	cat resources/posts.sql | \
+		 docker-compose exec -T db psql -U $(POSTGRES_USER) -d $(POSTGRES_DB)
 
 .PHONY: db-prompt
 db-prompt: ## Jumps into the Postgres DB psql prompt
 	docker-compose exec db psql -U $(POSTGRES_USER) -d $(POSTGRES_DB)
+
+.PHONEY: docker-run
+docker-run: ## Run Docker poetry test
+	docker-compose exec docker_test
+
+.PHONEY: db-seed
+db-seed: ## Seed postgres db
+	cat resources/db_data.sql | \
+		 docker-compose exec -T db psql -U $(POSTGRES_USER) -d $(POSTGRES_DB)
+
+.PHONEY: db-rebuild
+db-rebuild: ## Rebuild the database with schema and seed data
+	docker-compose down
+	docker-compose up -d db
+	sleep 1
+	$(MAKE) db-init db-seed
 
 .PHONY: help
 help: ## Display this message
