@@ -5,11 +5,10 @@ from sqlalchemy import delete, update
 from typing import Any
 
 
-def read_users():
-    with session_scope() as session:
-        users = session.query(User).all()
-        for user in users:
-            print(user.__dict__)
+def read_users(session):
+    users = session.query(User).all()
+    for user in users:
+        print(user.__dict__)
 
 
 def create_user():
@@ -21,32 +20,29 @@ def create_user():
     )
 
 
-def remove_user(user_id):
-    with session_scope() as session:
-        delete_user = delete(User).where(
-            User.id == user_id
-        )  # .execution_options(synchronize_session="fetch")
-        session.execute(delete_user)
-        session.commit()
+def remove_user(session, user_id):
+    delete_user = delete(User).where(
+        User.id == user_id
+    )  # .execution_options(synchronize_session="fetch")
+    session.execute(delete_user)
+    session.commit()
 
 
-def update_user(user_id, new_name):
-    with session_scope() as session:
-        update_user_first_name = (
-            update(User)
-            .where(User.id == user_id)
-            .values(first_name=new_name)
-            .execution_options(synchronize_session="fetch")
-        )
-        session.execute(update_user_first_name)
-        session.commit()
+def update_user(session, user_id, new_name):
+    update_user_first_name = (
+        update(User)
+        .where(User.id == user_id)
+        .values(first_name=new_name)
+        .execution_options(synchronize_session="fetch")
+    )
+    session.execute(update_user_first_name)
+    session.commit()
 
 
-def add_user():
-    with session_scope() as session:
-        user = create_user()
-        session.add(user)
-        session.commit()
+def add_user(session):
+    user = create_user()
+    session.add(user)
+    session.commit()
 
 
 def create_post(user: User):
@@ -59,41 +55,37 @@ def create_post(user: User):
     )
 
 
-def read_posts():
-    with session_scope() as session:
-        posts = session.query(Post).all()
-        for post in posts:
-            print(post.__dict__)
+def read_posts(session):
+    posts = session.query(Post).all()
+    for post in posts:
+        print(post.__dict__)
 
 
-def add_post():
-    with session_scope() as session:
-        post = create_post()
-        session.add(post)
-        session.commit()
+def add_post(session, user):
+    post = create_post(user)
+    session.add(post)
+    session.commit()
 
 
-def update_post(post_id, new_title):
-    with session_scope() as session:
-        update_post_title = (
-            update(Post)
-            .where(Post.id == post_id)
-            .values(title=new_title)
-            .execution_options(synchronize_session="fetch")
-        )
-        session.execute(update_post_title)
-        session.commit()
+def update_post(session, post_id, new_title):
+    update_post_title = (
+        update(Post)
+        .where(Post.id == post_id)
+        .values(title=new_title)
+        .execution_options(synchronize_session="fetch")
+    )
+    session.execute(update_post_title)
+    session.commit()
 
 
-def delete_post(post_id):
-    with session_scope() as session:
-        delete_post = (
-            delete(Post)
-            .where(Post.id == post_id)
-            .execution_options(synchronize_session="fetch")
-        )
-        session.execute(delete_post)
-        session.commit()
+def delete_post(session, post_id):
+    delete_post = (
+        delete(Post)
+        .where(Post.id == post_id)
+        .execution_options(synchronize_session="fetch")
+    )
+    session.execute(delete_post)
+    session.commit()
 
 
 def read_user(session: Any, user_id: int) -> User:
