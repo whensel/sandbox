@@ -2,6 +2,7 @@
 from .models import User, Post
 from .db import session_scope
 from sqlalchemy import delete, update
+from typing import Any
 
 
 def read_users():
@@ -22,11 +23,9 @@ def create_user():
 
 def remove_user(user_id):
     with session_scope() as session:
-        delete_user = (
-            delete(User)
-            .where(User.id == user_id)
-            .execution_options(synchronize_session="fetch")
-        )
+        delete_user = delete(User).where(
+            User.id == user_id
+        )  # .execution_options(synchronize_session="fetch")
         session.execute(delete_user)
         session.commit()
 
@@ -50,12 +49,13 @@ def add_user():
         session.commit()
 
 
-def create_post():
+def create_post(user: User):
     return Post(
         title="Some Random Thing Happened",
         summary="This random event was truly random",
         body="Blaw Blaw Blaw Blaw Blaw",
         is_deleted=False,
+        user=user,
     )
 
 
@@ -96,10 +96,28 @@ def delete_post(post_id):
         session.commit()
 
 
-def run(args=None):
-    # add_user()
-    remove_user(2)
-    read_users()
+def read_user(session: Any, user_id: int) -> User:
+    user = session.query(User).get(user_id)
+    return user
 
-    #  added_numbers = add("2,3")
+
+def run(args=None):
+    with session_scope() as session:
+        #  add_user()
+        #  remove_user(2)
+        #  update_user(1, "Bob")
+        #  read_users()
+
+        u = read_user(session, 1)
+        print(u.__dict__)
+        print(u.posts)
+
+        # post = u.posts[2]
+        # print(post.__dict__)
+
+        # session.delete(post)
+
+        # post = create_post(u)
+        # print(post.__dict__)
+        #  added_numbers = add("2,3")
     #  print(f"Added numbers value is: {added_numbers}")
